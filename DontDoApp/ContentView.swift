@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query (sort:\.timestamp, order: .reverse) private var items: [Item]
     @State private var newTitle: String = ""
     
     var body: some View {

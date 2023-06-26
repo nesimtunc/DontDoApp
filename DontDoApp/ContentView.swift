@@ -21,23 +21,38 @@ struct ContentView: View {
                         .textFieldStyle(.roundedBorder)
                         .padding()
                     
-                    Button(action: addItem, label: {
+                    Button(action: addItem) {
                         Text("Add")
-                    })
+                    }
                     .padding(.trailing)
                 }
                 List {
                     ForEach(items) { item in
-                        NavigationLink {
+                        HStack {
                             Text(item.title)
-                        } label: {
-                            Text(item.title)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Spacer()
+                            
+                            HStack {
+                                ActionButton("minus") {
+                                    updateItemCount(item, action: "-")
+                                }
+                                
+                                Text("\(item.count)").frame(width: 30)
+                                
+                                ActionButton("plus") {
+                                    updateItemCount(item, action: "+")
+                                }
+                            }
                         }
+                        
                     }
                     .onDelete(perform: deleteItems)
                 }
+                .selectionDisabled(true)
             }
-            .navigationTitle("Don't Do These")
+            .navigationTitle("Don't Do List")
             .toolbar {
 #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -50,6 +65,14 @@ struct ContentView: View {
         }
     }
     
+    private func updateItemCount(_ item: Item, action: String) {
+        if action == "-" && item.count > 0 {
+            item.count -= 1
+        } else {
+            item.count += 1
+        }
+    }
+
     private func addItem() {
         if newTitle.isEmpty { return }
         
@@ -69,6 +92,28 @@ struct ContentView: View {
     }
 }
 
+struct ActionButton: View {
+    let icon: String
+    let actionCall: () -> Void
+    
+    init(_ icon: String, actionCall: @escaping () -> Void) {
+        self.icon = icon
+        self.actionCall = actionCall
+    }
+    
+    var body: some View {
+        Button {
+            actionCall()
+        } label: {
+            Image(systemName: icon)
+                .font(.system(size: 20))
+                .foregroundColor(Color.blue)
+                .padding(10)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
 
 #Preview {
     ContentView()

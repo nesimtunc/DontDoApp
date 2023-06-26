@@ -12,11 +12,13 @@ import SwiftData
 final class Item {
     var id: UUID
     var title: String
+    var count: Int
     var timestamp: Date
     
     init(title: String) {
         self.id = UUID()
         self.title = title
+        self.count = 0
         self.timestamp = Date()
     }
 }

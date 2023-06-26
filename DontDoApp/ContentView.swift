@@ -17,7 +17,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 HStack {
-                    TextField("What NOT To Do?", text: $newTitle)
+                    TextField("What NOT to do?", text: $newTitle)
                         .textFieldStyle(.roundedBorder)
                         .padding()
                     
@@ -25,6 +25,12 @@ struct ContentView: View {
                         Text("Add")
                     }
                     .padding(.trailing)
+                }
+                if items.isEmpty {
+                    Text("Your list is empty. \nCreate something that you shouldn't do. \nHow about avoid heavy foods?")
+                        .font(.title2)
+                        .padding()
+                        .padding(.top, 100)
                 }
                 List {
                     ForEach(items) { item in

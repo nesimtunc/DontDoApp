@@ -61,9 +61,9 @@ struct ContentView: View {
             .navigationTitle("Don't Do List")
             .toolbar {
 #if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if !items.isEmpty {
-                        EditButton()
+                if !items.isEmpty {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                            EditButton()
                     }
                 }
 #endif

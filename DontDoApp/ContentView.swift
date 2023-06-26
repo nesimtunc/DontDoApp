@@ -11,42 +11,55 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    @State private var newTitle: String = ""
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+            VStack {
+                HStack {
+                    TextField("What NOT To Do?", text: $newTitle)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
+                    
+                    Button(action: addItem, label: {
+                        Text("Add")
+                    })
+                    .padding(.trailing)
                 }
-                .onDelete(perform: deleteItems)
+                List {
+                    ForEach(items) { item in
+                        NavigationLink {
+                            Text(item.title)
+                        } label: {
+                            Text(item.title)
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                }
             }
+            .navigationTitle("Don't Do These")
             .toolbar {
 #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-#endif
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    if !items.isEmpty {
+                        EditButton()
                     }
                 }
+#endif
             }
-            Text("Select an item")
         }
     }
-
+    
     private func addItem() {
+        if newTitle.isEmpty { return }
+        
         withAnimation {
-            let newItem = Item(timestamp: Date())
+            let newItem = Item(title: newTitle)
             modelContext.insert(newItem)
+            newTitle = ""
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -56,7 +69,8 @@ struct ContentView: View {
     }
 }
 
+
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Item.self, inMemory: false)
 }

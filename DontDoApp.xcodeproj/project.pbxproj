@@ -48,6 +48,8 @@
 		48481FE42A47E59100D1DE57 /* DontDoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DontDoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48481FE82A47E59100D1DE57 /* DontDoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontDoAppUITests.swift; sourceTree = "<group>"; };
 		48481FEA2A47E59100D1DE57 /* DontDoAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DontDoAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		484B0A632A4A6485002CB6FE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		484B0A642A4A6633002CB6FE /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,8 @@
 		48481FBD2A47E58F00D1DE57 = {
 			isa = PBXGroup;
 			children = (
+				484B0A642A4A6633002CB6FE /* LICENSE */,
+				484B0A632A4A6485002CB6FE /* README.md */,
 				48481FC82A47E59000D1DE57 /* DontDoApp */,
 				48481FDD2A47E59100D1DE57 /* DontDoAppTests */,
 				48481FE72A47E59100D1DE57 /* DontDoAppUITests */,
